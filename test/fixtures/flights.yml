@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  departure_airport_id: 1
+  arrival_airport_id: 1
+  departure_datetime: 2022-08-29 18:08:00
+  arrival_datetime: 2022-08-29 18:08:00
+  duration: 1
+  price: 9.99
+
+two:
+  departure_airport_id: 1
+  arrival_airport_id: 1
+  departure_datetime: 2022-08-29 18:08:00
+  arrival_datetime: 2022-08-29 18:08:00
+  duration: 1
+  price: 9.99
