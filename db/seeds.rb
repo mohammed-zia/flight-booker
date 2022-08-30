@@ -28,6 +28,20 @@ Flight.create!(departure_datetime: DateTime.new(2022, 10, 22, 17, 30),
               departure_airport_id: 1,
               arrival_airport_id: 2)
 
+Flight.create!(departure_datetime: DateTime.new(2022, 10, 22, 17, 30),
+              arrival_datetime: DateTime.new(2022, 10, 22, 18),
+              duration: ((DateTime.new(2022, 10, 22, 18) - DateTime.new(2022, 10, 22, 17, 30)) * 24 * 60).to_i,
+              price: 18.10,
+              departure_airport_id: 1,
+              arrival_airport_id: 2)
+              
+Flight.create!(departure_datetime: DateTime.new(2022, 10, 22, 17, 30),
+              arrival_datetime: DateTime.new(2022, 10, 22, 18),
+              duration: ((DateTime.new(2022, 10, 22, 18) - DateTime.new(2022, 10, 22, 17, 30)) * 24 * 60).to_i,
+              price: 82.10,
+              departure_airport_id: 1,
+              arrival_airport_id: 2)
+
 Flight.create(departure_datetime: DateTime.new(2022, 11, 22, 17, 30),
               arrival_datetime: DateTime.new(2022, 11, 22, 19, 30),
               duration: ((DateTime.new(2022, 10, 22, 19, 30) - DateTime.new(2022, 10, 22, 17, 30)) * 24 * 60).to_i,

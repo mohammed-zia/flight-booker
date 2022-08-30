@@ -1,0 +1,21 @@
+<% departure_airport = @selected_flight.departure_airport.code %>
+<% arrival_airport = @selected_flight.arrival_airport.code %>
+<% departure_date = @selected_flight.departure_datetime %>
+<% arrival_date = @selected_flight.arrival_datetime %>
+
+<h1>Booking details</h1>
+
+<%= departure_airport %> ---> <%= arrival_airport %> | <%= departure_date %> - <%= arrival_date %>
+
+<%= form_with model: @booking do |f| %>
+  <% i = 1 %>
+  <%= f.fields_for :passengers do |p| %>
+    <label><%= "Passenger #{i}" %><br/></label>
+    <%= p.text_field :name, placeholder: "Passenger's name" %>
+    <%= p.email_field :email, placeholder: "example@mail.com" %><br>
+  <% i += 1 %>
+  <% end %>
+  <%= f.hidden_field :flight_id, value: params[:flight] %>
+  <%= f.submit "Purchase Ticket" %>
+
+<% end %>

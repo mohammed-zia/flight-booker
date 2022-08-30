@@ -1,0 +1,15 @@
+<h1>Booking summary</h1>
+
+<% @booking.passengers.each_with_index do |p, i| %>
+  <h2> Passenger <%= i + 1 %> </h2>
+  <p> Name: <%= p.name %>
+  <p> Email: <%= p.email %>
+<% end %>
+
+<h2>Flight details</h1>
+<p>Flying from <%= @booking.flight.departure_airport.name_with_code %>, to <%= @booking.flight.arrival_airport.name_with_code %>.</p>
+<p>Departing on <%= @booking.flight.departure_date_formatted %>.</p>
+<p>Arriving on <%= @booking.flight.arrival_date_formatted %>.</p>
+<p>Total flight duration is <%= @booking.flight.duration %> minutes.</p>
+<p>Price per passenger is <%= number_to_currency(@booking.flight.price, :unit => "£") %>
+<p>Total price is <%= number_to_currency(@booking.flight.price * @booking.passengers.count, :unit => "£") %>

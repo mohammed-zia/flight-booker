@@ -2,7 +2,7 @@
 
 <strong>Search for a flight</strong>
 
-<%= form_with(model: @flight, url: "/", method: "get", html: { autocomplete: "off" }) do |f| %>
+<%= form_with(model: @flight, url: "/", method: "get") do |f| %>
   <label>Departure Airport</label>
   <%= f.collection_select :departure_airport_id, Airport.order(:name), :id, :name_with_code %>
   <label>Arrival Airport</label>
@@ -14,11 +14,20 @@
   <%= f.submit("Search") %>
 <% end %>
 <br>
-<% @flights.each do |flight| %>
-  <p>From <%= flight.departure_airport.name %> (<%= flight.departure_airport.code %>) to <%= flight.arrival_airport.name %> (<%= flight.arrival_airport.code %>) </p>
-  <p>Departs at <%= flight.departure_datetime.strftime("%H:%M") %> on <%= flight.departure_datetime.strftime("%d/%m/%Y") %>  and arrives at <%= flight.arrival_datetime.strftime("%H:%M") %> on <%= flight.arrival_datetime.strftime("%d/%m/%Y") %></p>
-  <p>Flight duration is <%= flight.duration/60 %> hours and <%= flight.duration%60 %> minutes.</p>
-  <p>Price: <%= number_to_currency(flight.price, :unit => "£")%></p>
-  <br>
+<% if @flights.any? %>
+  <%= form_with(model: @flight, url: "/bookings/new", method: "get") do |p| %>
   
+    <% @flights.each do |flight| %>
+    <p>
+      <%= p.radio_button :flight, flight.id %> From <%= flight.departure_airport.name %> (<%= flight.departure_airport.code %>) to <%= flight.arrival_airport.name %> (<%= flight.arrival_airport.code %>) 
+      <p>Departs at <%= flight.departure_datetime.strftime("%H:%M") %> on <%= flight.departure_datetime.strftime("%d/%m/%Y") %>  and arrives at <%= flight.arrival_datetime.strftime("%H:%M") %> on <%= flight.arrival_datetime.strftime("%d/%m/%Y") %></p>
+      <p>Flight duration is <%= flight.duration/60 %> hours and <%= flight.duration%60 %> minutes.</p>
+      <p>Price: <%= number_to_currency(flight.price, :unit => "£")%></p>
+      <br>
+    </p>
+    <% end %>
+    <%= p.hidden_field :num_passengers, value: params[:passengers] %>
+    <%= p.submit("Next: Booking details")%>
   <% end %>
+<% end %>
+
