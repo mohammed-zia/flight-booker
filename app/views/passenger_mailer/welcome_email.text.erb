@@ -1,0 +1,24 @@
+Welcome to Flight Booker, <%= @user.name %>!
+===============================================
+
+Your flight has been booked successfully.
+  Booking summary
+
+  <% @booking.passengers.each_with_index do |p, i| %>
+     Passenger <%= i + 1 %> 
+     Name: <%= p.name %>
+     Email: <%= p.email %>
+  <% end %>
+
+  Flight details
+  Flying from <%= @booking.flight.departure_airport.name_with_code %>, to <%= @booking.flight.arrival_airport.name_with_code %>.
+  Departing on <%= @booking.flight.departure_date_formatted %>.
+  Arriving on <%= @booking.flight.arrival_date_formatted %>.
+  Total flight duration is <%= @booking.flight.duration %> minutes.
+  Price per passenger is <%= number_to_currency(@booking.flight.price, :unit => "£") %>
+  Total price is <%= number_to_currency(@booking.flight.price * @booking.passengers.count, :unit => "£") %>
+
+
+To login to the site, just follow this link: <%= @url %>.
+
+Thanks for joining and have a great day!
